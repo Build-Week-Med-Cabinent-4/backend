@@ -90,4 +90,20 @@ GET /api/strains
 ```
 PATCH /api/strains/:id/save
 ```
+```
+{
+  "user_id": 1,
+  "strain_id": 2,
+}
+```
+---
+```
+PATCH /api/strains/:id/release
+```
+```
+{
+  "user_id": null,
+  "strain_id": 2,
+}
+```
 
