@@ -93,7 +93,7 @@ Method | URL | Description
 GET | /api/users | Returns an array of users
 GET | /api/users/:id/strains | Returns an array strains for user ID
 POST | /api/users/:id/strains | Adds a strain to user ID
-PUT | /api/users/:id/strains/:strain_id | Replaces strain for user ID
+PUT | /api/users/:id/strains/:strain_id | Updates strain for user ID
 DELETE | /api/users/:id/strains/:strain_id |  Deletes strain from user ID
 
 ---
