@@ -26,7 +26,8 @@ router.post('/login', (req, res) => {
   .then(([user]) => {
     if(user && bcrypt.compareSync(password, user.password)){
       const token = generateToken(user);
-      res.status(200).json({message: 'Welcome', token});
+      let userInfo = user.id;
+      res.status(200).json({message: 'Welcome', token, userInfo});
     } else {
       res.status(401).json({message: 'Authentication failed'});
     }
