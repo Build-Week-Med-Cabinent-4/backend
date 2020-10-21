@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     const requestOptions = {
         headers: { accept: 'application/json' },
       };
-  Strains.getStrains(requestOptions)
+  Strains.find(requestOptions)
     .then((strains) => {
       res.status(200).json(strains);
     })
