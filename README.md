@@ -1,8 +1,6 @@
 
 # Med Cabinet Node Backend
 
-## Schema
-
 # API Endpoints
 Deployed to Heroku: https://med-cabinet-6.herokuapp.com/
 
