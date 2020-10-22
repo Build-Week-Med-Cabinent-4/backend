@@ -23,17 +23,41 @@ router.delete('/:id', async (req, res, next) => {
 });
 
 // strains CRUD routes
-// GET users/:id/strains
+// GET users by ID
+router.get('/:id', (req, res, next) => {
+  const { id } = req.params;
+  
+  Users.findById(id)
+  .then(users => {
+    if(users) {
+      res.status(200).json(users);
+    } else {
+      res.status(404).json({ message: 'could not find user for given ID'})
+    }
+  })
+ .catch (err => {
+   res.status(500).json({ message: 'failed to get user'});
+   });
+});
+
+//GET strains for specific user ID
 router.get('/:id/strains', (req, res, next) => {
     
   const { id } = req.params;
-  Strains.findById(id)
-  .then(
-    strains => {res.status(200).json(strains);})
- .catch (err => res.send(err))
-})
+  Users.findUserStrain(id)
+  .then(strains => {
+    if (strains.length) {
+      res.status(200).json(strains);
+    } else {
+      res.status(404).json({ message: 'could not find strains for given user ID'})
+    }
+  })
+ .catch (err => {
+   res.status(500).json({ message: 'failed to get strains'})
+   });
+});
 
-// POST users/:id/strains
+// POST new strain to user ID
 router.post('/:id/strains', async (req, res, next) => {
   const strain = req.body;
   strain.user_id = req.params.id;
@@ -46,7 +70,7 @@ router.post('/:id/strains', async (req, res, next) => {
   }
 });
 
-// UPDATE users/:id/strains/:strain_id
+// UPDATE strain from user by user ID and strain ID
 router.put(
   '/:id/strains/:strain_id',
   async (req, res, next) => {
@@ -71,7 +95,7 @@ router.put(
   }
 );
 
-// DELETE users/:id/strains/:strain_id
+// DELETE strain from user by user ID and strain ID
 router.delete(
   '/:id/strains/:strain_id',
   async (req, res, next) => {
