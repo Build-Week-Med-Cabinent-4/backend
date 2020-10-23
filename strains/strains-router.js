@@ -19,4 +19,21 @@ router.get('/', (req, res) => {
     });
 });
 
+//GET strain by ID
+router.get('/:id', (req, res, next) => {
+    
+  const { id } = req.params;
+  Strains.findById(id)
+  .then( strains => {
+    if (strains.length) {
+      res.status(200).json(strains);
+    } else {
+      res.status(404).json({ message: 'could not find strain for given ID'})
+    }
+  })
+ .catch (err => {
+   res.status(500).json({ message: 'failed to get strain'})
+ })
+})
+
 module.exports = router;

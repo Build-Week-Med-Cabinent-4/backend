@@ -5,6 +5,7 @@ add,
 find,
 findBy,
 findById,
+findUserStrain,
 remove
 }
 
@@ -20,6 +21,22 @@ async function add(user) {
   }
 function findById(id){
     return db('user_table').where({id}).first();
+}
+
+function findUserStrain(id) {
+    return db('user_table')
+      .join('strains_table', 'strains_table.user_id', '=', 'user_table.id')
+      .where('strains_table.user_id', id)
+      .select(
+        'user_id',
+        'strains_table.id as strain_id',
+        'strain',
+        'type',
+        'rating',
+        'effects',
+        'flavor',
+        'description'
+      );
 }
 
 function remove(id) {
