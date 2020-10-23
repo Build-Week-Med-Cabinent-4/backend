@@ -7,6 +7,7 @@ router.get('/', async (req, res, next) => {
   try {
     const users = await Users.find();
     res.status(200).json(users);
+    console.log(users)
   } catch (err) {
     next({ apiCode: 500, apiMessage: 'db error getting users', ...err });
   }

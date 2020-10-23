@@ -27,6 +27,7 @@ describe("login with user", () => {
             .send(testUser)
         expect(res.status).toBe(200)
     });
+    
     it("should return a status code of 401 when given invalid user", async () => {
         const res = await request(server)
             .post("/api/auth/login")
@@ -34,3 +35,47 @@ describe("login with user", () => {
         expect(res.status).toBe(401)
     });
 });
+
+describe("get users returns", () => {
+    it("should return a 200 status code", async () => {
+        const res = await request(server)
+            .get("/api/users")
+            expect(res.status).toBe(200)
+    });
+    
+    it("should return a status code of 500 when failed to get users", async () => {
+        const res = await request(server)
+            .get("/api/userss")
+        expect(res.status).toBe(404)
+    });
+});
+
+describe("get user by id", () => {
+    it("should return a 200 status code", async () => {
+        const res = await request(server)
+            .get("/api/users/1")
+            expect(res.status).toBe(200)
+    });
+    
+    it("should return a status code of 404 if user was not found", async () => {
+        const res = await request(server)
+            .get("/api/users/23")
+        expect(res.status).toBe(404)
+    });
+});
+
+describe("delete user", () => {
+    it("should return a 200 status code", async () => {
+        const res = await request(server)
+            .delete("/api/users/1")
+            expect(res.status).toBe(200)
+    });
+    
+    it("should return a status code of 404 if user was not found", async () => {
+        const res = await request(server)
+            .delete("/api/users")
+        expect(res.status).toBe(404)
+    });
+});
+
+
