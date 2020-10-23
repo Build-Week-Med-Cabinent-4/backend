@@ -12,7 +12,7 @@ router.post('/register', (req, res) => {
 
   Users.add(user)
   .then((user) => {
-    console.log(user);
+    console.log(user)
     res.status(201).json(user);
   })
   .catch(err => {
@@ -24,6 +24,7 @@ router.post('/login', (req, res) => {
   let {username, password} = req.body;
   Users.findBy({username})
   .then(([user]) => {
+    console.log(user)
     if(user && bcrypt.compareSync(password, user.password)){
       const token = generateToken(user);
       let userInfo = user.id;
